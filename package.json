@@ -4,7 +4,7 @@
   "description": "projet dev-web 2023 ece paris",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
   },
   "keywords": [],
   "author": "Axel PAPE",
-  "coauthor": Raphael LAZZARI-ARMOUR
+  "coauthor": "Raphael LAZZARI-ARMOUR",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/RaphLAZ/ece-webtech-gr02-04/issues"
