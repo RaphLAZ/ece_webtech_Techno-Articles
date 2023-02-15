@@ -1,0 +1,15 @@
+{
+  "name": "project-raph",
+  "version": "1.0.0",
+  "description": "a simple app to order our project during web technologie course at ECE Paris",
+  "main": "project.js",
+  "scripts": {
+    "develop": "nodemon project.js"
+  },
+  "keywords": [],
+  "author": "Raphael LAZZARI-ARMOUR",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
