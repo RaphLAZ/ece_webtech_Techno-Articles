@@ -7,3 +7,14 @@
 
 * Original instructions git : https://github.com/adaltas/ece-webtech-2023-spring-app 
 
+## Prerequisites
+
+* Node.js
+
+## Getting Started
+
+git clone https://github.com/RaphLAZ/ece-webtech-gr02-04/tree/main
+
+
+
+
