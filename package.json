@@ -4,7 +4,8 @@
   "description": "projet dev-web 2023 ece paris",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "develop": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/RaphLAZ/ece-webtech-gr02-04/issues"
   },
-  "homepage": "https://github.com/RaphLAZ/ece-webtech-gr02-04#readme"
+  "homepage": "https://github.com/RaphLAZ/ece-webtech-gr02-04#readme",
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
