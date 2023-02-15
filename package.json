@@ -4,8 +4,7 @@
   "description": "projet dev-web 2023 ece paris",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "develop": "nodemon index.js"
+    "develop": "nodemon handles.js"
   },
   "repository": {
     "type": "git",

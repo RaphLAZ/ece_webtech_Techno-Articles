@@ -22,7 +22,7 @@ const presentation = '<!DOCTYPE html>' +
 '<html>' +
 '    <head>' +
 '        <meta charset="utf-8" />' +
-'        <title>Web Tech App</title>' +
+'        <title>Web Tech Project App</title>' +
 '    </head>' +
 '    <body>' +
 '       <h1>Welcome to the biographie page</h1>' +
@@ -31,9 +31,9 @@ const presentation = '<!DOCTYPE html>' +
 '</html>'
 
 const server = http.createServer((req, res) => {
-const parsedUrl = url.parse(req.url, true);
-const path = parsedUrl.pathname;
-const query = parsedUrl.query;
+  const parsedUrl = url.parse(req.url, true);
+  const path = parsedUrl.pathname;
+  const query = parsedUrl.query;
 
   //Dans le cas où l'url est juste http://localhost:8080/
   if (path === '/') {
