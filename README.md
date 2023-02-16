@@ -13,8 +13,9 @@
 
 ## Getting Started
 
+```
 git clone https://github.com/RaphLAZ/ece-webtech-gr02-04/tree/main
-
+```
 
 
 
