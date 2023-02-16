@@ -17,6 +17,21 @@
 git clone https://github.com/RaphLAZ/ece-webtech-gr02-04/tree/main
 ```
 
+```
+cd ./ece-webtech-gr02-04
+```
+
+```
+npm install
+```
+
+```
+npm run dev
+```
+
+
+
+
 
 
 
