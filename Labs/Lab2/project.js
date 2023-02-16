@@ -1,7 +1,6 @@
 const http = require('http');
 const url = require('url');
-const fs = require('fs');
-const port = 8080;
+const port = 8080 ;
 
 const explication = '<!DOCTYPE html>' +
 '<html>' +
@@ -50,7 +49,6 @@ const server = http.createServer((req, res) => {
       res.writeHead(400, { 'Content-Type': 'text/plain' });
       res.write('Please provide a name query parameter');
       res.end();
-      return;
     }
     //Dans le cas où le champ "name" est celui d'un du binôme
     else if (name === 'Raphael' || 'Axel') {
