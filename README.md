@@ -11,9 +11,9 @@
 
 * Node.js
 
-## Getting Started
+# Getting Started
 
-# Open a terminal 
+## Open a terminal 
 
 * Clone our repository :
 
@@ -33,6 +33,10 @@ npm install
 * Run the app :
 ```
 npm run dev
+```
+* Open the web interface with this link :
+```
+http://localhost:8080
 ```
 
 
