@@ -13,18 +13,22 @@
 
 ## Getting Started
 
+* Clone the repository
+
 ```
 git clone https://github.com/RaphLAZ/ece-webtech-gr02-04/tree/main
 ```
 
+* moov in the cloned repository
 ```
 cd ./ece-webtech-gr02-04
 ```
 
+* Install all the packages needed
 ```
 npm install
 ```
-
+* Run the app
 ```
 npm run dev
 ```
