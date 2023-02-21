@@ -36,7 +36,6 @@ npm install
 ```
 npm run develop
 ```
-## Start the app by running the file in your terminal with node app.js (assuming the file name is app.js).
 
 * Visit :
 ```
