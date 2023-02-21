@@ -1,7 +1,9 @@
-const http = require('http');
+/*const http = require('http');
 const url = require('url');
-const fs = require('fs');
+const fs = require('fs');*/
 const port = 8080;
+const express = require('express');
+const app = express();
 
 const explication = '<!DOCTYPE html>' +
 '<html>' +
@@ -30,20 +32,26 @@ const presentation = '<!DOCTYPE html>' +
 '       </body>' +
 '</html>'
 
-const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url, true);
-  const path = parsedUrl.pathname;
-  const query = parsedUrl.query;
+/*const server = http.createServer((req, res) => {
+const parsedUrl = url.parse(req.url, true);
+const path = parsedUrl.pathname;
+const query = parsedUrl.query;*/
 
   //Dans le cas où l'url est juste http://localhost:8080/
-  if (path === '/') {
+  /*if (path === '/') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write(explication);
     res.end();
-  }
+  }*/
+
+//Dans le cas où l'url est juste http://localhost:8080/
+const rootRouter = express.Router();
+rootRouter.get('/', (req, res) => {
+  res.status(200).send(explication);
+});
 
   //Dans le cas où l'url est http://localhost:8080/hello?name=NAME
-  else if (path === '/hello') {
+  /*else if (path === '/hello') {
     const name = query.name;
     //Dans le cas où le champ "name" n'est pas rempli
     if (!name) {
@@ -63,24 +71,50 @@ const server = http.createServer((req, res) => {
       res.write(`Hello ${name}!`);
       res.end();
     }
+  }*/
+
+//Dans le cas où l'url est http://localhost:8080/hello?name=NAME
+const helloRouter = express.Router();
+helloRouter.get('/hello', (req, res) => {
+  const name = req.query.name;
+  if (!name) {
+    res.status(400).send('Please provide a name query parameter');
+  } else if (name === 'Raphael' || name === 'Axel') {
+    res.status(200).send(presentation);
+  } else {
+    res.status(200).send(`Hello ${name}!`);
   }
+});
 
   //Dans le cas où l'url est http://localhost:8080/about
-  else if (path === '/about') {
+  /*else if (path === '/about') {
     const file = require('./content/about.json')
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify(file));
     res.end();
-  }
+  }*/
+
+//Dans le cas où l'url est http://localhost:8080/about
+const aboutRouter = express.Router();
+aboutRouter.get('/about', (req, res) => {
+  const about = require('./content/about.json');
+  res.status(200).json(about);
+});
 
   //Affiche une erreur 404 si on est dans aucun cas de figure précèdent
-  else {
+  /*else {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.write('404 Not Found');
     res.end();
   }
+  
+});*/
+
+//Affiche une erreur 404 si on est dans aucun cas de figure précèdent
+app.use((req, res) => {
+  res.status(404).send('404 Not Found');
 });
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
