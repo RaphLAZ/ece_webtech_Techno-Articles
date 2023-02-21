@@ -30,14 +30,33 @@ cd ./ece-webtech-gr02-04
 ```
 npm install
 ```
+# Lab 2
+
 * Run the app :
 ```
-npm run dev
+npm run develop
 ```
-* Open the web interface with this link :
+## Start the app by running the file in your terminal with node app.js (assuming the file name is app.js).
+
+* Visit :
 ```
-http://localhost:8080
+http://localhost:3000/ 
 ```
+To see the explanation of how to use the app
+
+* Visit :
+```
+http://localhost:3000/hello?name=[your name]
+```
+To see a short intro of yourself
+
+* Visit :
+```
+http://localhost:3000/hello?name=[random name] 
+```
+To see a random greeting to the provided name
+
+Any other path , e.g http://localhost:3000/foo, to see a 404 Not Found message.
 
 
 
