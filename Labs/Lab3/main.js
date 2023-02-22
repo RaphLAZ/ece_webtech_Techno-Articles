@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const db = require('./db'); // import the db object from db.js
+const uuid = require('uuid');
 
 // GET /articles - list all articles
 app.get('/articles', (req, res) => {
@@ -11,7 +12,7 @@ app.get('/articles', (req, res) => {
 // POST /articles - add a new article
 app.post('/articles', (req, res) => {
   const newArticle = {
-    id: create_UUID(), // example UUID generation method
+    id: uuid.v4(), // example UUID generation method
     title: req.body.title,
     content: req.body.content,
     date: req.body.date,
@@ -22,7 +23,8 @@ app.post('/articles', (req, res) => {
 });
 
 // GET /articles/:articleId - get an article by ID
-app.get('/articles/:articleId', (req, res) => {
+app.get('/articles/articleId', (req, res) => {
+  const articleId = req.query.articleId;
   const article = db.articles.find(a => a.id === req.params.articleId);
   if (!article) {
     res.status(404).json({ message: 'Article not found' });
@@ -30,16 +32,6 @@ app.get('/articles/:articleId', (req, res) => {
     res.json(article);
   }
 });
-
-function create_UUID(){
-  var dt = new Date().getTime();
-  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = (dt + Math.random()*16)%16 | 0;
-    dt = Math.floor(dt/16);
-    return (c=='x' ? r :(r&0x3|0x8)).toString(16);
-  });
-  return uuid;
-}
 
 // Start the server
 app.listen(port, () => {
