@@ -22,7 +22,7 @@ app.post('/articles', (req, res) => {
   res.status(201).json(newArticle);
 });
 
-// GET /articles/:articleId - get an article by ID
+// GET /articles/articleId - get an article by ID
 app.get('/articles/articleId', (req, res) => {
   const articleId = req.query.articleId;
   const article = db.articles.find(a => a.id === req.params.articleId);
@@ -30,6 +30,35 @@ app.get('/articles/articleId', (req, res) => {
     res.status(404).json({ message: 'Article not found' });
   } else {
     res.json(article);
+  }
+});
+
+// GET /articles/articlesId/comments - get all comments for an article 
+app.get('/articles/articleId/comments', (req, res) => {
+  const comments = db.comments.filter(c => c.articleId === req.params.articleId);
+  res.send(comments);
+});
+
+// POST /articles/articleId/comments - add a new comment to a specific article with articleId
+app.post('/articles/articleId/comments', (req, res) => {
+  const newComment = {
+    id: uuidv4(), // generate a new UUID for the comment
+    timestamp: Date.now(), // use current timestamp as comment timestamp
+    content: req.body.content,
+    articleId: req.params.articleId,
+    author: req.body.author
+  };
+  db.comments.push(newComment);
+  res.status(201).send(newComment);
+});
+
+// GET /articles/articleId/comments/commentId - get a comment with commentId of the article with articleId
+app.get('/articles/articleId/comments/commentId', (req, res) => {
+  const comment = db.comments.find(c => c.id === req.params.commentId && c.articleId === req.params.articleId);
+  if (!comment) {
+    res.status(404).send('Comment not found');
+  } else {
+    res.send(comment);
   }
 });
 
