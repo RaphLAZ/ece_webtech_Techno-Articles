@@ -27,3 +27,14 @@ app.post('/articles', (req, res) => {
   db.articles.push(newArticle);
   res.status(201).json(newArticle);
 });
+
+// GET /articles/articleId - get an article by ID
+app.get('/articles/articleId', (req, res) => {
+    const articleId = req.query.articleId;
+    const article = db.articles.find(a => a.id === req.params.articleId);
+    if (!article) {
+      res.status(404).json({ message: 'Article not found' });
+    } else {
+      res.json(article);
+    }
+  });
