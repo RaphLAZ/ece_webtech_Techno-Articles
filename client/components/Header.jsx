@@ -1,36 +1,39 @@
-import React from 'react';
-import Link from 'next/link';
+import Link from 'next/link'
 
-function Header() {
-  return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/about">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link href="/contacts">
-              Contacts
-            </Link>
-          </li>
-          <li>
-            <Link href="/articles">
-              Articles
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
+const Header = () => {
+    return (
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                        <Link href="/">
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/about">
+                            About
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/contacts">
+                            Contacts
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/events">
+                            Events
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/articles">
+                            Articles
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    );
 }
 
-export default Header;
-
+export default Header

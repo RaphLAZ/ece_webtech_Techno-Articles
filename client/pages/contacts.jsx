@@ -1,18 +1,17 @@
-// pages/contacts.js
-import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Layout from "../components/Layout";
 
-function Contacts() {
-  return (
-    <div>
-      <Header/>
-      <h1>Contact Page</h1>
-      <p>Get in touch with us.</p>
-      <Footer/>
-    </div>
-  );
+const ContactsPage = () => {
+    return (
+        <>
+            <Layout>
+            <main>
+                <h1>Contact Us</h1> <br/>
+                <p>Have any questions or feedback? Feel free to reach out to us!</p>
+                <p>Email: contact@bloggingwebsite.com</p>
+            </main>
+            </Layout>
+        </>
+    )
 }
 
-export default Contacts;
-
+export default ContactsPage

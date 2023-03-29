@@ -1,18 +1,15 @@
-// pages/about.js
-import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Layout from "../components/Layout";
 
-function About() {
-  return (
-    <div>
-      <Header/>
-      <h1>About Page</h1>
-      <p>Learn more about us.</p>
-      <Footer/>
-    </div>
-  );
+export default function About() {
+    return (
+        <>
+            <Layout>
+                <title>About Page</title>
+                <main>
+                    <h1>About Me</h1> <br/>
+                    <p style={{fontStyle: 'italic'}}> Hi there! I'm a software engineer.</p>
+                </main>
+            </Layout>
+        </>
+    );
 }
-
-export default About;
-
