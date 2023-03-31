@@ -9,6 +9,9 @@ export default function LibraryHomepage() {
                 <title>Library Home</title>
                 <meta name="description" content="Welcome to our library" />
             </Head>
+            <h1 className='font-bold'>
+                Welcome to the library !
+            </h1>
             <ul>
                 <li>
                     <Link href="/articles">

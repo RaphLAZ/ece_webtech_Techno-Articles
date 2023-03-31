@@ -9,10 +9,10 @@ export default function Articles() {
             <Layout>
                 <title>Articles Page</title>
                 <main>
-                    <h1>Articles</h1> <br/>
+                    <h1 className='font-bold'>Books</h1> <br/>
                     <ul>
                         {articles.map((article) => (
-                            <li key={article.id}>
+                            <li className="rounded py-1 px-2 hover:bg-slate-600 hover:text-slate-100">
                                 <Link href={`/articles/${article.id}`} passHref={true}>
                                     <div>{article.title}</div>
                                 </Link>

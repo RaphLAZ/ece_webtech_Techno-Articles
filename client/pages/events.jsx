@@ -9,13 +9,13 @@ export default function Events() {
                 <title>Library Events</title>
                 <meta name="description" content="View upcoming library events and activities." />
             </Head>
-            <h1>Upcoming Library Events</h1> <br/>
+            <h1 className='font-bold'>Upcoming Library Events</h1> <br/>
             <ul>
                 {events.map(event => (
                     <li key={event.id}>
-                        <h2>{event.title}</h2>
+                        <h2 className='font-bold'>{event.title}</h2>
                         <p>{event.date} at {event.time}</p>
-                        <p>{event.location}</p>
+                        <p className='italic'>{event.location}</p>
                         <p>{event.description}</p> <br/>
                     </li>
                 ))}

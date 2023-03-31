@@ -11,7 +11,7 @@ export default function Article() {
         <>
             <Layout>
                 <main>
-                    <h1>{article.title}</h1> <br/>
+                    <h1 className='font-bold'>{article.title}</h1> <br/>
                     <p className='italic'> By {article.author}</p> <br/>
                     <p className='italic'> {article.content}</p>
                 </main>
