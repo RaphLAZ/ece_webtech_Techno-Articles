@@ -5,3 +5,19 @@
 .wt-title {
     @apply text-3xl font-bold underline mb-10;
 }
+
+.background-image {
+    background-image: url(../public/backscreen.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.text-color {
+    color: white;
+}
+
+.centered-text {
+    text-align: center;
+}
+
+
