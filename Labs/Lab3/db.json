@@ -1,0 +1,17 @@
+[
+    {
+      "id": "6ec0bd7f-11c0-43da-975e-2a8ad9ebae0b",
+      "title": "Book-Harry",
+      "content": "All the collection of the Harry Potter saga",
+      "date": "04/10/2022",
+      "author": "Liz Gringer"
+    },
+    {
+      "id": "c1b6baaf-3411-4a68-8d9a-14d89e4faa54",
+      "title": "DVD-Batman",
+      "content": "A DVD of a batman movie",
+      "date": "04/11/2022",
+      "author": "John Smith"
+    }
+]
+

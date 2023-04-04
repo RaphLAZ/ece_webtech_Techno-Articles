@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const db = require('./db'); // import the db object from db.js
+const db = require('./db.json'); // import the db object from db.json
 const uuid = require('uuid');
 
 // GET /articles - list all articles
 app.get('/articles', (req, res) => {
-  res.json(db.articles);
+  res.json(db);
 });
 
 // POST /articles - add a new article
@@ -18,7 +18,7 @@ app.post('/articles', (req, res) => {
     date: req.body.date,
     author: req.body.author
   };
-  db.articles.push(newArticle);
+  db.push(newArticle);
   res.status(201).json(newArticle);
 });
 

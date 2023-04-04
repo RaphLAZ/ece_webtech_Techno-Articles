@@ -1,4 +1,4 @@
-[
+const comments = [
   {
     "commentid": "1",
     "id": "1",
@@ -95,10 +95,6 @@
     "author": "Jane Doe",
     "content": "This book exceeded my expectations, highly recommended!"
   },
-  {
-    "commentid": "17",
-    "id": "1",
-    "author": "John Smith",
-    "content": "I couldn't agree more, this book is a masterpiece!"
-  }
-]
+];
+
+module.exports = comments;
