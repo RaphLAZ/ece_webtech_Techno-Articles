@@ -5,9 +5,9 @@ export default function Layout({
    children
 }){
     return (
-        <div className="background-image">
+        <div>
             <Header />
-            <main className="py-10 min-h-screen max-w-full md:max-w-5xl md:mx-auto">
+            <main className="py-10 min-h-screen max-w-full md:max-w-3xl md:mx-auto">
                 {children}
             </main>
             <Footer />
