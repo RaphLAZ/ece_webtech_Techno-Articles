@@ -1,5 +1,4 @@
-import React from 'react';
-import Header from '../component/Header';
+import styles from '../styles/*.styles.css
 
 function HomePage() {
     return <div>
