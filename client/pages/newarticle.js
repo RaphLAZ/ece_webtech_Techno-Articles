@@ -1,54 +1,33 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
+import {supabase} from "../components/supabaseClient";
 
-function NewArticle() {
+export default function NewArticle() {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [description, setDescription] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Check if any field is empty
         if (!title || !author || !description) {
-            setErrorMessage("Please fill all fields.");
+            setErrorMessage("Please fill in all the fields.");
             return;
         }
 
-        setIsSubmitting(true);
+        const { error } = await supabase.from("articles").insert([
+            { title, author, description },
+        ]);
 
-        try {
-            const response = await fetch("/api/newarticle", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ title, author, description }),
-            });
-
-            if (!response.ok) {
-                throw new Error("Something went wrong!");
-            }
-
-            const newArticle = await response.json();
-            console.log("New article added:", newArticle);
-
-            // Reset form and show success message
-            setTitle("");
-            setAuthor("");
-            setDescription("");
+        if (error) {
+            setSuccessMessage("");
+            setErrorMessage("An error occurred while creating the article.");
+        } else {
             setSuccessMessage("Article successfully added!");
             setErrorMessage("");
-        } catch (error) {
-            console.error(error);
-
-            // Show error message
-            setSuccessMessage("");
-            setErrorMessage("Something went wrong! Please try again.");
         }
-
-        setIsSubmitting(false);
     };
 
     const handleCancel = () => {
@@ -58,11 +37,12 @@ function NewArticle() {
         setDescription("");
     };
 
-
     return (
         <Layout>
             <div className="max-w-3xl mx-auto py-8 px-4">
-                <h1 className="text-3xl font-bold text-gray-800 mb-8">Create New Article</h1>
+                <h1 className="text-3xl font-bold text-gray-800 mb-8">
+                    Create New Article
+                </h1>
                 {successMessage && (
                     <div className="bg-green-200 text-green-800 p-3 mb-4 rounded-md">
                         {successMessage}
@@ -75,7 +55,10 @@ function NewArticle() {
                 )}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
+                        <label
+                            htmlFor="title"
+                            className="block text-gray-700 font-bold mb-2"
+                        >
                             Title
                         </label>
                         <input
@@ -88,7 +71,10 @@ function NewArticle() {
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="author" className="block text-gray-700 font-bold mb-2">
+                        <label
+                            htmlFor="author"
+                            className="block text-gray-700 font-bold mb-2"
+                        >
                             Author
                         </label>
                         <input
@@ -101,7 +87,10 @@ function NewArticle() {
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
+                        <label
+                            htmlFor="description"
+                            className="block text-gray-700 font-bold mb-2"
+                        >
                             Description
                         </label>
                         <textarea
@@ -113,19 +102,22 @@ function NewArticle() {
                         />
                     </div>
                     <div className="flex justify-end">
-                        <button type="button" onClick={handleCancel} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-4">
+                        <button
+                            type="button"
+                            onClick={handleCancel}
+                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-4"
+                        >
                             Cancel
                         </button>
-                        <button type="submit" disabled={isSubmitting} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            {isSubmitting ? "Creating Article..." : "Create Article"}
+                        <button
+                            type="submit"
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Create Article
                         </button>
                     </div>
                 </form>
             </div>
         </Layout>
     );
-
-
 }
-
-export default NewArticle;

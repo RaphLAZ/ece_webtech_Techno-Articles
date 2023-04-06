@@ -4,12 +4,12 @@ const port = 3000;
 const db = require('./db.json'); // import the db object from db.json
 const uuid = require('uuid');
 
-// GET /articles - list all articles
+// GET /viewarticle - list all viewarticle
 app.get('/articles', (req, res) => {
   res.json(db);
 });
 
-// POST /articles - add a new article
+// POST /viewarticle - add a new article
 app.post('/articles', (req, res) => {
   const newArticle = {
     id: uuid.v4(), // example UUID generation method
@@ -22,7 +22,7 @@ app.post('/articles', (req, res) => {
   res.status(201).json(newArticle);
 });
 
-// GET /articles/articleId - get an article by ID
+// GET /viewarticle/articleId - get an article by ID
 app.get('/articles/articleId', (req, res) => {
   const articleId = req.query.articleId;
   const article = db.articles.find(a => a.id === req.params.articleId);
@@ -33,13 +33,13 @@ app.get('/articles/articleId', (req, res) => {
   }
 });
 
-// GET /articles/articlesId/comments - get all comments for an article 
+// GET /viewarticle/articlesId/comments - get all comments for an article
 app.get('/articles/articleId/comments', (req, res) => {
   const comments = db.comments.filter(c => c.articleId === req.params.articleId);
   res.send(comments);
 });
 
-// POST /articles/articleId/comments - add a new comment to a specific article with articleId
+// POST /viewarticle/articleId/comments - add a new comment to a specific article with articleId
 app.post('/articles/articleId/comments', (req, res) => {
   const newComment = {
     id: uuidv4(), // generate a new UUID for the comment
@@ -52,7 +52,7 @@ app.post('/articles/articleId/comments', (req, res) => {
   res.status(201).send(newComment);
 });
 
-// GET /articles/articleId/comments/commentId - get a comment with commentId of the article with articleId
+// GET /viewarticle/articleId/comments/commentId - get a comment with commentId of the article with articleId
 app.get('/articles/articleId/comments/commentId', (req, res) => {
   const comment = db.comments.find(c => c.id === req.params.commentId && c.articleId === req.params.articleId);
   if (!comment) {

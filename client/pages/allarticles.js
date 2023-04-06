@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import articles from '../data/articles';
+import {supabase} from "../components/supabaseClient";
 
-function AllArticles() {
+function AllArticles({ articles }) {
     return (
         <Layout>
             <div className="max-w-3xl mx-auto py-8 px-4">
@@ -22,7 +22,7 @@ function AllArticles() {
                             <p className="text-lg mb-2">{article.description}</p>
                         </div>
                         <div className="mt-2">
-                            <Link href={`/articles/${article.id}`}>
+                            <Link href={`/viewarticle/${article.id}`}>
                                 <a className="text-blue-700 hover:text-blue-900">Read more</a>
                             </Link>
                         </div>
@@ -31,6 +31,16 @@ function AllArticles() {
             </div>
         </Layout>
     );
+}
+
+export async function getServerSideProps() {
+    let { data } = await supabase.from('articles').select()
+
+    return {
+        props: {
+            articles: data
+        },
+    }
 }
 
 export default AllArticles;

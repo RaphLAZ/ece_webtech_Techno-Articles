@@ -13,7 +13,6 @@ function CommentForm(props) {
         const newComment = {
             author: "Anonymous",
             content: comment,
-            timestamp: new Date(),
         };
         props.onCommentSubmit(newComment);
         setComment("");
