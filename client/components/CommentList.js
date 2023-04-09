@@ -1,10 +1,10 @@
 import React from "react";
 import { supabase } from "./supabaseClient";
 
-function CommentList(props) {
+export default function CommentList(props) {
     const handleDeleteComment = async (commentId) => {
         try {
-            const { data, error } = await supabase
+            const {data, error} = await supabase
                 .from("comments")
                 .delete()
                 .eq("id", commentId);
@@ -37,5 +37,3 @@ function CommentList(props) {
         </ul>
     );
 }
-
-export default CommentList;

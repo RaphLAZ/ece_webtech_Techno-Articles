@@ -1,39 +1,49 @@
-import { useState } from "react";
+import {useContext, useState} from "react";
 import Layout from "../components/Layout";
 import {supabase} from "../components/supabaseClient";
+import UserContext from "../components/UserContext";
+import {useRouter} from 'next/router';
 
 export default function NewArticle() {
     const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
     const [description, setDescription] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+    const {user} = useContext(UserContext)
+    const router = useRouter();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!title || !author || !description) {
-            setErrorMessage("Please fill in all the fields.");
+        if (!title || !description) {
+            alert("Please fill in all the fields.");
             return;
         }
 
-        const { error } = await supabase.from("articles").insert([
-            { title, author, description },
-        ]);
+        if (!user){
+            alert("You need to be registered to be able to create an article")
+            return
+        }
+
+        const {error } = await supabase.from("articles").insert([
+            {
+                title: title,
+                author: user.username,
+                description: description,
+                user_id: user.user_id,
+           },
+        ]).single();
 
         if (error) {
-            setSuccessMessage("");
-            setErrorMessage("An error occurred while creating the article.");
-        } else {
-            setSuccessMessage("Article successfully added!");
-            setErrorMessage("");
+            alert(error.message)
+        }
+        else {
+            alert("Article successfully added !");
+            await router.push('/')
         }
     };
 
     const handleCancel = () => {
         // Reset form fields
         setTitle("");
-        setAuthor("");
         setDescription("");
     };
 
@@ -43,16 +53,6 @@ export default function NewArticle() {
                 <h1 className="text-3xl font-bold text-gray-800 mb-8">
                     Create New Article
                 </h1>
-                {successMessage && (
-                    <div className="bg-green-200 text-green-800 p-3 mb-4 rounded-md">
-                        {successMessage}
-                    </div>
-                )}
-                {errorMessage && (
-                    <div className="bg-red-200 text-red-800 p-3 mb-4 rounded-md">
-                        {errorMessage}
-                    </div>
-                )}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label
@@ -67,22 +67,6 @@ export default function NewArticle() {
                             id="title"
                             value={title}
                             onChange={(event) => setTitle(event.target.value)}
-                            className="border border-gray-400 p-2 w-full rounded"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label
-                            htmlFor="author"
-                            className="block text-gray-700 font-bold mb-2"
-                        >
-                            Author
-                        </label>
-                        <input
-                            type="text"
-                            name="author"
-                            id="author"
-                            value={author}
-                            onChange={(event) => setAuthor(event.target.value)}
                             className="border border-gray-400 p-2 w-full rounded"
                         />
                     </div>

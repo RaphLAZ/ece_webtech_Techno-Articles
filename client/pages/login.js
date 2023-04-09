@@ -1,26 +1,77 @@
-import { useState } from 'react';
-import Layout from "../components/Layout";
+import React, {useContext, useState} from 'react';
+import { supabase } from "../components/supabaseClient";
+import Layout from '../components/Layout'
+import Signup from './signup';
+import UserContext from "../components/UserContext";
+import {useRouter} from 'next/router';
+import Cookie from 'js-cookie';
 
-function Login() {
-    const [login, setLogin] = useState(true); // determines if login or signup form is displayed
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+
+function LoginPage() {
+    const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [Login, setLogin] = useState(true);
+    const {login} = useContext(UserContext)
+    const router = useRouter();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = { username, password };
-        // handle login or signup logic here
+        setLoading(true);
+
+        if (Login) {
+            const { error } = await supabase.auth.signInWithPassword({ email: username, password: password });
+            if (error) {
+                alert(error.message);
+                setLoading(false);
+            }
+            else {
+                alert("You are correctly connected !");
+                let { data: users } = await supabase
+                    .from('users')
+                    .select('*')
+                    .single()
+                const user = {
+                    username: users.first_name,
+                    user_id: users.id,
+                }
+                login(user)
+                Cookie.set('userdata', JSON.stringify(user));
+                await router.push('/')
+            }
+        }
+
+        else {
+            const { error } = await supabase.auth.signUp({ email: username, password: password });
+            if (error) {
+                alert(error.message);
+                setLoading(false);
+            }
+            alert("your account has been created correctly !")
+            let { data: users } = await supabase
+                .from('users')
+                .select('*')
+                .single()
+            const user = {
+                username: username.split('@')[0],
+                user_id: users.id,
+            }
+            login(user)
+            Cookie.set('userdata', JSON.stringify(user));
+            await router.push('/')
+        }
     };
 
     return (
         <Layout>
             <div className="flex justify-center items-center h-screen bg-white">
                 <div className="bg-white p-8 rounded-md shadow-md">
-                    <h1 className="text-2xl font-bold mb-4 centered-text">{login ? 'Login' : 'Sign Up'}</h1>
+                    <h1 className="text-2xl font-bold mb-4 text-center">
+                        {Login ? 'Login' : 'Sign Up'}
+                    </h1>
                     <form onSubmit={handleSubmit} className="flex flex-col">
                         <label className="mb-2 font-bold" htmlFor="username">
-                            Username:
+                            Email:
                         </label>
                         <input
                             type="text"
@@ -40,22 +91,23 @@ function Login() {
                             className="mb-4 border rounded-md py-2 px-3"
                         />
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            {login ? 'Login' : 'Sign Up'}
+                            {Login ? 'Login' : 'Sign Up'}
                         </button>
                     </form>
-                    <p className="mt-4">
-                        {login ? "Don't have an account?" : 'Already have an account?'}
+                    <div className="mt-4 text-center">
+                        <p>{Login ? "Don't have an account?" : 'Already have an account?'}</p>
                         <button
-                            onClick={() => setLogin(!login)}
+                            onClick={() => setLogin(!Login)}
                             className="ml-2 text-blue-700 hover:text-blue-900 font-bold"
                         >
-                            {login ? 'Sign up' : 'Log in'}
+                            {Login ? 'Sign up' : 'Log in'}
                         </button>
-                    </p>
+                    </div>
                 </div>
             </div>
+            {!Login && <Signup />}
         </Layout>
     );
 }
 
-export default Login;
+export default LoginPage;

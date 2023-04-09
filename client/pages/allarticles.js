@@ -1,18 +1,25 @@
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import {supabase} from "../components/supabaseClient";
+import {useRouter} from "next/router";
+import {useContext} from "react";
+import UserContext from "../components/UserContext";
 
 function AllArticles({ articles }) {
+    const {user} = useContext(UserContext)
+
+    console.log(user)
+
     return (
         <Layout>
             <div className="max-w-3xl mx-auto py-8 px-4">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-4xl font-bold">All Articles</h1>
-                    <Link href="/newarticle">
-                        <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Add Article
-                        </a>
-                    </Link>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <Link href={'/newarticle'}>
+                            Add article
+                        </Link>
+                    </button>
                 </div>
                 {articles.map((article) => (
                     <div key={article.id} className="bg-gray-100 rounded-lg p-4 mb-4">
@@ -22,9 +29,11 @@ function AllArticles({ articles }) {
                             <p className="text-lg mb-2">{article.description}</p>
                         </div>
                         <div className="mt-2">
-                            <Link href={`/viewarticle/${article.id}`}>
-                                <a className="text-blue-700 hover:text-blue-900">Read more</a>
-                            </Link>
+                            <button className="text-blue-700 hover:text-blue-900">
+                                <Link href={`/viewarticle/${article.id}`}>
+                                    Read more
+                                </Link>
+                            </button>
                         </div>
                     </div>
                 ))}
@@ -33,7 +42,7 @@ function AllArticles({ articles }) {
     );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     let { data } = await supabase.from('articles').select()
 
     return {

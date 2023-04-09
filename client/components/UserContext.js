@@ -1,26 +1,41 @@
-import {createContext, useState} from 'react'
+import { createContext, useState, useEffect } from "react";
+import Cookie from 'js-cookie';
+import {useRouter} from "next/router";
 
-const UserContext = createContext()
+const UserContext = createContext(undefined);
 
-export default UserContext
+export default UserContext;
 
-export const UserContextProvider = ({
-children
-}) => {
-    const [user, setUser] = useState(null)
+export const UserContextProvider = ({ children }) => {
+    let [user, setUser] = useState(null);
+    const router = useRouter();
+
+    // Load the user from the cookie when the component mounts
+    useEffect(() => {
+        const cookieUser = Cookie.get('user');
+        if (cookieUser) {
+            const parsedUser = JSON.parse(cookieUser);
+            setUser(parsedUser);
+        }
+    }, []);
+
     return (
         <UserContext.Provider
             value={{
                 user: user,
                 login: (user) => {
-                    setUser(user)
+                    setUser({ ...user, isLoggedIn: true });
+                    Cookie.set('user', JSON.stringify({ ...user, isLoggedIn: true }));
                 },
-                logout: () => {
-                    setUser(null)
+                logout: async () => {
+                    setUser({isLoggedIn: false});
+                    Cookie.remove('user');
+                    await router.reload()
+                    await router.push('/')
                 }
             }}
         >
             {children}
         </UserContext.Provider>
-    )
-}
+    );
+};
