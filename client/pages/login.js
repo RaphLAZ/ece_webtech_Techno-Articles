@@ -31,6 +31,7 @@ function LoginPage() {
                     .from('users')
                     .select('*')
                     .single()
+                console.log(users)
                 const user = {
                     username: users.first_name,
                     user_id: users.id,
@@ -42,7 +43,11 @@ function LoginPage() {
         }
 
         else {
-            const { error } = await supabase.auth.signUp({ email: username, password: password });
+            const { error } = await supabase.auth.signUp(
+                {
+                    email: username,
+                    password: password
+                });
             if (error) {
                 alert(error.message);
                 setLoading(false);
