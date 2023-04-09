@@ -105,7 +105,6 @@ function LoginPage() {
                     </div>
                 </div>
             </div>
-            {!Login && <Signup />}
         </Layout>
     );
 }
