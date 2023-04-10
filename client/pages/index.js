@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect, useContext} from "react";
 import Layout from "../components/Layout";
 import { supabase } from "../components/supabaseClient";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function HomePage({ articles }) {
+export default function HomePage({articles}) {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     useEffect(() => {
@@ -17,9 +17,9 @@ export default function HomePage({ articles }) {
     const displayedArticles = articles.slice(0, 3);
 
     const carouselImages = [
-        { src: "/cybersecurity.jpg", alt: "Picture 1" },
-        { src: "/software.jpg", alt: "Picture 2" },
-        { src: "/technologies.jpg", alt: "Picture 3" },
+        {src: "/cybersecurity.jpg", alt: "Picture 1"},
+        {src: "/software.jpg", alt: "Picture 2"},
+        {src: "/technologies.jpg", alt: "Picture 3"},
     ];
 
     return (
@@ -38,8 +38,9 @@ export default function HomePage({ articles }) {
                         objectFit="cover"
                         className="rounded-lg"
                     />
-                </div>{" "}
-                <br />
+                </div>
+                {" "}
+                <br/>
                 {displayedArticles.map((article) => (
                     <div
                         key={article.id}
@@ -62,14 +63,15 @@ export default function HomePage({ articles }) {
                 </div>
             </div>
             <style jsx>{`
-        .rounded-lg {
-          border-radius: 10px;
-        }
-        .rounded-lg img {
-          width: 100%;
-          height: 100%;
-        }
-      `}</style>
+              .rounded-lg {
+                border-radius: 10px;
+              }
+
+              .rounded-lg img {
+                width: 100%;
+                height: 100%;
+              }
+            `}</style>
         </Layout>
     );
 }

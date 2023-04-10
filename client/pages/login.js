@@ -1,37 +1,39 @@
 import React, {useContext, useState} from 'react';
 import { supabase } from "../components/supabaseClient";
 import Layout from '../components/Layout'
-import Signup from './signup';
 import UserContext from "../components/UserContext";
 import {useRouter} from 'next/router';
 import Cookie from 'js-cookie';
 
-
 function LoginPage() {
-    const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [Login, setLogin] = useState(true);
     const {login} = useContext(UserContext)
     const router = useRouter();
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
 
         if (Login) {
-            const { error } = await supabase.auth.signInWithPassword({ email: username, password: password });
+            const { error } = await supabase.auth.signInWithPassword(
+                {
+                    email: username,
+                    password: password
+                });
             if (error) {
                 alert(error.message);
-                setLoading(false);
             }
             else {
                 alert("You are correctly connected !");
-                let { data: users } = await supabase
+                let { data: users, error } = await supabase
                     .from('users')
                     .select('*')
                     .single()
-                console.log(users)
+                if (error){
+                    alert(error.message)
+                }
                 const user = {
                     username: users.first_name,
                     user_id: users.id,
@@ -50,20 +52,21 @@ function LoginPage() {
                 });
             if (error) {
                 alert(error.message);
-                setLoading(false);
             }
-            alert("your account has been created correctly !")
-            let { data: users } = await supabase
-                .from('users')
-                .select('*')
-                .single()
-            const user = {
-                username: username.split('@')[0],
-                user_id: users.id,
+            else {
+                alert("your account has been created correctly !")
+                let {data: users} = await supabase
+                    .from('users')
+                    .select('*')
+                    .single()
+                const user = {
+                    username: users.first_name,
+                    user_id: users.id,
+                }
+                login(user)
+                Cookie.set('userdata', JSON.stringify(user));
+                await router.push('/')
             }
-            login(user)
-            Cookie.set('userdata', JSON.stringify(user));
-            await router.push('/')
         }
     };
 

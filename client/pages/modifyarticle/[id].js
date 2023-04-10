@@ -10,12 +10,9 @@ export default function ModifyArticle({ article }) {
     const {user} = useContext(UserContext)
     const router = useRouter();
 
-    console.log(user)
-
-
     useEffect(() => {
 
-        setTitle("vrivrvi");
+        setTitle(article.title);
         setDescription(article.description);
     }, [article]);
 
@@ -26,7 +23,6 @@ export default function ModifyArticle({ article }) {
             alert("Please fill in all the fields.");
             return;
         }
-        console.log(user)
         if(!user){
             alert("You need to be connected to be able to modify an article")
             return
