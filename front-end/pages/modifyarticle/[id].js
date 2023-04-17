@@ -1,64 +1,70 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Layout from "../../components/Layout";
-import {supabase} from "../../components/supabaseClient";
+import UserContext from "../../components/UserContext";
+import {useRouter} from "next/router";
+import {supabase} from '../../components/supabaseClient'
 
-export default function NewArticle({ article }) {
+export default function ModifyArticle({ article }) {
     const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
     const [description, setDescription] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+    const {user} = useContext(UserContext)
+    const router = useRouter();
 
     useEffect(() => {
+
         setTitle(article.title);
-        setAuthor(article.author);
         setDescription(article.description);
     }, [article]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!title || !author || !description) {
-            setErrorMessage("Please fill in all the fields.");
+        if (!title || !description) {
+            alert("Please fill in all the fields.");
             return;
         }
+        if(!user){
+            alert("You need to be connected to be able to modify an article")
+            return
+        } else if (user.id != article.user_id) {
+            alert("You can only modify articles created by you")
+            await router.push(`/viewarticle/${article.id}`)
+            return
+        }
 
-        const {error} = await supabase.from("articles").insert([
-            {title, author, description},
-        ]);
+        const { error} = await supabase
+            .from("articles")
+            .update
+            ([
+                {
+                title: title,
+                author: user.username,
+                description: description,
+                user_id: user.user_id,
+                },
+            ])
+            .eq('id', article.id);
 
         if (error) {
-            setSuccessMessage("");
-            setErrorMessage("An error occurred while creating the article.");
-        } else {
-            setSuccessMessage("Article successfully added!");
-            setErrorMessage("");
+            console.log(error.message)
+            alert("An error occurred while creating the article.");
+        }
+        else {
+            alert("Article successfully modified!");
+            await router.push(`/viewarticle/${article.id}`)
         }
     };
 
-    const handleCancel = () => {
-        // Reset form fields
-        setTitle("");
-        setAuthor("");
-        setDescription("");
+    const handleCancel = async () => {
+        await router.push(`/viewarticle/${article.id}`)
     };
 
     return (
         <Layout>
             <div className="max-w-3xl mx-auto py-8 px-4">
                 <h1 className="text-3xl font-bold text-gray-800 mb-8">
-                    Create New Article
+                    Modify Article
                 </h1>
-                {successMessage && (
-                    <div className="bg-green-200 text-green-800 p-3 mb-4 rounded-md">
-                        {successMessage}
-                    </div>
-                )}
-                {errorMessage && (
-                    <div className="bg-red-200 text-red-800 p-3 mb-4 rounded-md">
-                        {errorMessage}
-                    </div>
-                )}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label
@@ -73,22 +79,6 @@ export default function NewArticle({ article }) {
                             id="title"
                             value={title}
                             onChange={(event) => setTitle(event.target.value)}
-                            className="border border-gray-400 p-2 w-full rounded"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label
-                            htmlFor="author"
-                            className="block text-gray-700 font-bold mb-2"
-                        >
-                            Author
-                        </label>
-                        <input
-                            type="text"
-                            name="author"
-                            id="author"
-                            value={author}
-                            onChange={(event) => setAuthor(event.target.value)}
                             className="border border-gray-400 p-2 w-full rounded"
                         />
                     </div>
@@ -119,7 +109,7 @@ export default function NewArticle({ article }) {
                             type="submit"
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         >
-                            Create Article
+                            Modify Article
                         </button>
                     </div>
                 </form>
@@ -128,7 +118,7 @@ export default function NewArticle({ article }) {
     );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
     const { id } = params;
     const { data, error } = await supabase
         .from('articles')
@@ -147,5 +137,28 @@ export async function getServerSideProps({ params }) {
         props: {
             article: data,
         },
+        revalidate: 60 // regenerate page every 60 seconds
+    };
+}
+
+export async function getStaticPaths() {
+    const { data, error } = await supabase
+        .from("articles")
+        .select("id");
+
+    if (error) {
+        console.log(error.message);
+        return {
+            notFound: true,
+        };
+    }
+
+    const paths = data.map((article) => ({
+        params: { id: String(article.id) },
+    }));
+
+    return {
+        paths,
+        fallback: false,
     };
 }
