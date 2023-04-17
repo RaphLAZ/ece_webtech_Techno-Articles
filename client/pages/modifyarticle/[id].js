@@ -1,13 +1,19 @@
-import { useState } from "react";
-import Layout from "../components/Layout";
-import {supabase} from "../components/supabaseClient";
+import {useEffect, useState} from "react";
+import Layout from "../../components/Layout";
+import {supabase} from "../../components/supabaseClient";
 
-export default function NewArticle() {
+export default function NewArticle({ article }) {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [description, setDescription] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+
+    useEffect(() => {
+        setTitle(article.title);
+        setAuthor(article.author);
+        setDescription(article.description);
+    }, [article]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -17,8 +23,8 @@ export default function NewArticle() {
             return;
         }
 
-        const { error } = await supabase.from("articles").insert([
-            { title, author, description },
+        const {error} = await supabase.from("articles").insert([
+            {title, author, description},
         ]);
 
         if (error) {
@@ -120,4 +126,26 @@ export default function NewArticle() {
             </div>
         </Layout>
     );
+}
+
+export async function getServerSideProps({ params }) {
+    const { id } = params;
+    const { data, error } = await supabase
+        .from('articles')
+        .select()
+        .eq('id', id)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return {
+            notFound: true,
+        };
+    }
+
+    return {
+        props: {
+            article: data,
+        },
+    };
 }

@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import articles from '../data/articles';
 import Layout from '../components/Layout';
+import {supabase} from "../components/supabaseClient";
 
-function HomePage() {
-    // display only a few articles
+function HomePage({ articles }) {
+    // display only a few viewarticle
     const displayedArticles = articles.slice(0, 3);
 
     return (
@@ -17,12 +17,10 @@ function HomePage() {
 
                 {displayedArticles.map((article) => (
                     <div key={article.id} className="bg-gray-100 rounded-lg p-4 mb-4">
-                        <Link href={`/articles/${article.id}`}>
-                            <a className="font-bold text-xl mb-2 hover:text-blue-700">{article.title}</a>
-                        </Link>
+                        <p className="font-bold text-xl mb-2 hover:text-blue-700">{article.title}</p>
                         <p className="text-gray-600 mb-2">{article.author}</p>
                         <p className="text-lg mb-2">{article.description}</p>
-                        <Link href={`/articles/${article.id}`}>
+                        <Link href={`/viewarticle/${article.id}`}>
                             <a className="text-blue-700 hover:text-blue-900">Read more</a>
                         </Link>
                     </div>
@@ -38,6 +36,16 @@ function HomePage() {
             </div>
         </Layout>
     );
+}
+
+export async function getServerSideProps() {
+    let { data } = await supabase.from('articles').select()
+
+    return {
+        props: {
+            articles: data
+        },
+    }
 }
 
 export default HomePage;
