@@ -1,48 +1,42 @@
-import {createContext, useState} from 'react'
+import { createContext, useState, useEffect } from "react";
+import Cookie from 'js-cookie';
+import {useRouter} from "next/router";
+import {supabase} from "./supabaseClient";
 
-const UserContext = createContext()
+const UserContext = createContext(undefined);
 
-export default UserContext
+export default UserContext;
 
-export const UserContextProvider = ({
-<<<<<<< HEAD
-  children
-}) => {
-  const [user, setUser] = useState(null)
-  return (
-    <UserContext.Provider
-      value={{
-        user: user,
-        login: (user) => {
-          setUser(user)
-        },
-        logout: () => {
-          setUser(null)
+export const UserContextProvider = ({ children }) => {
+    let [user, setUser] = useState(null);
+    const router = useRouter();
+
+    // Load the user from the cookie when the component mounts
+    useEffect( () => {
+        const cookieUser = Cookie.get('user');
+        if (cookieUser) {
+            const parsedUser = JSON.parse(cookieUser);
+            setUser(parsedUser);
         }
-      }}
-    >
-      {children}
-    </UserContext.Provider>
-  )
-}
-=======
-children
-}) => {
-    const [user, setUser] = useState(null)
+    }, []);
+
     return (
         <UserContext.Provider
             value={{
                 user: user,
                 login: (user) => {
-                    setUser(user)
+                    setUser({ ...user, isLoggedIn: true });
+                    Cookie.set('user', JSON.stringify({ ...user, isLoggedIn: true }));
                 },
-                logout: () => {
-                    setUser(null)
+                logout: async () => {
+                    setUser({isLoggedIn: false});
+                    Cookie.remove('user');
+                    await router.reload()
+                    await router.push('/')
                 }
             }}
         >
             {children}
         </UserContext.Provider>
-    )
-}
->>>>>>> d391d90e3ff32a2f3db7b5fe9b94646b9b8eace5
+    );
+};

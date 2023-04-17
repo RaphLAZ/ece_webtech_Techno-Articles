@@ -1,20 +1,22 @@
-import React from "react";
-import { supabase } from "./supabaseClient";
+import React, {useContext} from "react";
+import {useRouter} from "next/router";
+import UserContext from "./UserContext";
+import {supabase} from "./supabaseClient";
 
-function CommentList(props) {
+export default function CommentList(props) {
+    const router = useRouter();
+    const {user} = useContext(UserContext)
+
     const handleDeleteComment = async (commentId) => {
-        try {
-            const { data, error } = await supabase
-                .from("comments")
-                .delete()
-                .eq("id", commentId);
-            if (error) {
-                throw error;
-            }
-            console.log(data);
-            window.location.reload();
-        } catch (error) {
-            console.log("Error deleting comment:", error.message);
+        const {data, error} = await supabase
+            .from("comments")
+            .delete()
+            .eq("id", commentId);
+        if (error) {
+            alert("You can only delete your comments !");
+        }
+        else{
+            router.reload();
         }
     };
 
@@ -24,12 +26,14 @@ function CommentList(props) {
                 <li key={comment.id} className="bg-gray-100 rounded-lg p-2 mb-2">
                     <div className="flex justify-between items-center mb-1">
                         <p className="text-gray-500 text-sm">{comment.author}</p>
-                        <button
-                            className="text-red-500"
-                            onClick={() => handleDeleteComment(comment.id)}
-                        >
-                            Delete
-                        </button>
+                        {user && (user.user_id === comment.user_id) && (
+                            <button
+                                className="text-red-500"
+                                onClick={() => handleDeleteComment(comment.id)}
+                            >
+                                Delete
+                            </button>
+                        )}
                     </div>
                     <p className="text-lg">{comment.content}</p>
                 </li>
@@ -37,5 +41,3 @@ function CommentList(props) {
         </ul>
     );
 }
-
-export default CommentList;
