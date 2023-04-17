@@ -4,7 +4,6 @@ import UserContext from "../components/UserContext";
 import {useRouter} from 'next/router';
 import Cookie from 'js-cookie';
 import {supabase} from '../components/supabaseClient'
-import { FaGithub } from "react-icons/fa";
 
 function LoginPage() {
     const [username, setUsername] = useState('');

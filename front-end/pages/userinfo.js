@@ -80,17 +80,17 @@ export default function Userinfo() {
     }
 
     const handleDeleteAccount = async () => {
-        let { data, error } = await supabase
-            .rpc('deleteUser')
+            let { data, error } = await supabase
+                .rpc('deleteUser')
 
-        if (error){
-            alert(error.message)
-            return
-        }
-        else{
-            alert("Account has been successfully deleted !")
-            logout()
-        }
+            if (error){
+                alert(error.message)
+                return
+            }
+            else{
+                alert("Account has been successfully deleted !")
+                logout()
+            }
     }
 
     return (

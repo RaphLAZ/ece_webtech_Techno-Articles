@@ -1,109 +1,116 @@
-import React, { useState } from "react";
+import {useState} from "react";
 import Layout from "../components/Layout";
+import {useRouter} from 'next/router';
+import {supabase} from '../components/supabaseClient'
 
+export default function Contact() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const router = useRouter();
 
-function Contact() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: "",
-    });
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+        if (!name || !email || !message) {
+            alert("Please fill in all the fields.");
+            return;
+        }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
+        const {error} = await supabase
+            .from("contactrequest")
+            .insert([
+                {
+                    name: name,
+                    email: email,
+                    message: message,
                 },
-                body: JSON.stringify(formData),
-            });
-
-            if (response.status === 200) {
-                // Handle success
-                console.log('Data written to file');
-                setFormData({
-                    name: '',
-                    email: '',
-                    message: '',
-                });
-            } else {
-                // Handle error
-                console.error('Error writing to file');
-            }
-        } catch (error) {
-            console.error(error);
+            ]).single();
+        if (error) {
+            alert(error.message)
+        } else {
+            alert("Message successfully sent !");
+            await router.push('/')
         }
     };
 
+    const handleCancel = () => {
+        setName("");
+        setEmail("");
+        setMessage("");
+    };
 
     return (
         <Layout>
             <div className="max-w-3xl mx-auto py-8 px-4">
-                <h1 className="text-4xl font-bold mb-6">Contact Us</h1>
+                <h1 className="text-3xl font-bold text-gray-800 mb-8">
+                    Contact Us
+                </h1>
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-6">
-                        <label htmlFor="name" className="block mb-2 font-bold text-gray-700">
+                    <div className="mb-4">
+                        <label
+                            htmlFor="name"
+                            className="block text-gray-700 font-bold mb-2"
+                        >
                             Name
                         </label>
                         <input
                             type="text"
-                            id="name"
                             name="name"
-                            value={formData.name}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            placeholder="Enter your name"
-                            required
+                            id="name"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            className="border border-gray-400 p-2 w-full rounded"
                         />
                     </div>
-                    <div className="mb-6">
-                        <label htmlFor="email" className="block mb-2 font-bold text-gray-700">
+                    <div className="mb-4">
+                        <label
+                            htmlFor="email"
+                            className="block text-gray-700 font-bold mb-2"
+                        >
                             Email
                         </label>
                         <input
                             type="email"
-                            id="email"
                             name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            placeholder="Enter your email"
-                            required
+                            id="email"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
+                            className="border border-gray-400 p-2 w-full rounded"
                         />
                     </div>
-                    <div className="mb-6">
-                        <label htmlFor="message" className="block mb-2 font-bold text-gray-700">
+                    <div className="mb-4">
+                        <label
+                            htmlFor="message"
+                            className="block text-gray-700 font-bold mb-2"
+                        >
                             Message
                         </label>
                         <textarea
-                            id="message"
                             name="message"
-                            value={formData.message}
-                            onChange={handleInputChange}
-                            rows="5"
-                            className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            placeholder="Enter your message"
-                            required
+                            id="message"
+                            value={message}
+                            onChange={(event) => setMessage(event.target.value)}
+                            className="border border-gray-400 p-2 w-full rounded"
                         />
                     </div>
-                    <button
-                        type="submit"
-                        className="inline-block px-6 py-3 text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Submit
-                    </button>
+                    <div className="flex justify-end">
+                        <button
+                            type="button"
+                            onClick={handleCancel}
+                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-4"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Send Message
+                        </button>
+                    </div>
                 </form>
             </div>
         </Layout>
-    );
-}
-
-export default Contact;
+    )
+};
