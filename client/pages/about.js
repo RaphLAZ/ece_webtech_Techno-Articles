@@ -34,6 +34,7 @@ function About() {
                 </div>
                 <p className="text-lg mb-6">
                     Raphael and Axel are two engineering students at ECE Engineering School who share a
+
                     common passion for cybersecurity. They have always been intrigued by the intricacies
                     of computer systems and how they can be hacked into. They spent countless hours reading
                     up on the latest developments in the field and experimenting with various hacking tools.
