@@ -1,14 +1,23 @@
 import UserContext from './UserContext';
 import LoggedIn from "./header/LoggedIn";
 import LoggedOut from "./header/LoggedOut";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import Link from "next/link";
+import {useRouter} from "next/router";
 
 const Header = () => {
-    const {user} = useContext(UserContext)
+    const {user} = useContext(UserContext);
+    const [searchTerm, setSearchTerm] = useState("");
+    const router = useRouter();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        router.push(`/searchresult?q=${searchTerm}`);
+    };
+
     return (
         <header>
-            <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 text-white flex justify-between items-center">
+            <nav className="border-gray-200 px-4 lg:px-6 py-2.5 bg-gray-800 text-white flex justify-between items-center">
                 <img src="/logo.png" alt="Logo" className="w-20 h-30"/>
                 <div className="flex items-center">
                     <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
@@ -43,9 +52,24 @@ const Header = () => {
                             </Link>
                         </li>
                     </ul>
+                    <form onSubmit={handleSearch} className="ml-4 lg:ml-8 flex items-center">
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="border-gray-300 text-black border-2 rounded-md px-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                        />
+                        <button
+                            type="submit"
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+                        >
+                            Search
+                        </button>
+                    </form>
                 </div>
                 <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            {user ? <LoggedIn /> : <LoggedOut />}
+                    {user ? <LoggedIn /> : <LoggedOut />}
                 </div>
             </nav>
         </header>

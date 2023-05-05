@@ -26,7 +26,7 @@ export default function ModifyArticle({ article }) {
         if(!user){
             alert("You need to be connected to be able to modify an article")
             return
-        } else if (user.id != article.user_id) {
+        } else if (user.user_id !== article.user_id) {
             alert("You can only modify articles created by you")
             await router.push(`/viewarticle/${article.id}`)
             return
@@ -118,7 +118,7 @@ export default function ModifyArticle({ article }) {
     );
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const { id } = params;
     const { data, error } = await supabase
         .from('articles')
@@ -137,28 +137,5 @@ export async function getStaticProps({ params }) {
         props: {
             article: data,
         },
-        revalidate: 60 // regenerate page every 60 seconds
-    };
-}
-
-export async function getStaticPaths() {
-    const { data, error } = await supabase
-        .from("articles")
-        .select("id");
-
-    if (error) {
-        console.log(error.message);
-        return {
-            notFound: true,
-        };
-    }
-
-    const paths = data.map((article) => ({
-        params: { id: String(article.id) },
-    }));
-
-    return {
-        paths,
-        fallback: false,
     };
 }

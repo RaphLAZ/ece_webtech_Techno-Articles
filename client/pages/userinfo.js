@@ -1,50 +1,42 @@
-import React, {useContext, useEffect, useState} from 'react';
-import Layout from '../components/Layout'
-import UserContext from "../components/UserContext";
-import {useRouter} from "next/router";
-import {supabase} from '../components/supabaseClient'
-
-async function fetchUserData() {
-    const { data, error } = await supabase
-        .from('users')
-        .select('*')
-        .single();
-    if (error) {
-        console.log(error.message)
-        return
-    }
-    else{
-        return data;
-    }
-}
+import React, { useContext, useEffect, useState } from 'react';
+import Layout from '../components/Layout';
+import UserContext from '../components/UserContext';
+import { useRouter } from 'next/router';
+import { supabase } from '../components/supabaseClient';
 
 export default function Userinfo() {
-    const [YearofBirth, setYearofBirth] = useState(null)
-    const [first_name, setFirstName] = useState(null)
-    const [last_name, setLastName] = useState(null)
-    const [country, setCountry] = useState(null)
-    const [job, setJob] = useState(null)
-    const {user, login, logout} = useContext(UserContext)
+    const [YearofBirth, setYearofBirth] = useState(null);
+    const [first_name, setFirstName] = useState(null);
+    const [last_name, setLastName] = useState(null);
+    const [country, setCountry] = useState(null);
+    const [job, setJob] = useState(null);
+    const { user, login, logout } = useContext(UserContext);
     const router = useRouter();
 
     useEffect(() => {
-        if (user) {
-            async function fetchData() {
-                try {
-                    const data = await fetchUserData();
+        const fetchUserData = async () => {
+            if (user) {
+                const { data, error } = await supabase
+                    .from('users')
+                    .select('*')
+                    .eq('id', user.user_id)
+                    .single();
 
-                    setYearofBirth(data.year_of_birth);
-                    setFirstName(data.first_name);
-                    setLastName(data.last_name);
-                    setCountry(data.country);
-                    setJob(data.job);
-                } catch (error) {
+                if (error) {
                     console.error(error);
+                    return;
                 }
+
+                setYearofBirth(data.YearofBirth || '');
+                setFirstName(data.first_name || '');
+                setLastName(data.last_name || '');
+                setCountry(data.country || '');
+                setJob(data.job || '');
             }
-            fetchData();
-        }
-    });
+        };
+
+        fetchUserData();
+    }, [user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,29 +47,24 @@ export default function Userinfo() {
                 last_name,
                 YearofBirth,
                 country,
-                job
+                job,
             };
 
-            const { error } = await supabase
-                .from('users')
-                .update(userdata)
-                .eq('id', user.user_id);
+            const { error } = await supabase.from('users').update(userdata).eq('id', user.user_id);
 
             if (error) {
                 throw error;
-            }
-            else{
+            } else {
                 alert('User info updated successfully');
                 user.username = userdata.first_name;
-                login(user)
-                await router.push('/')
+                login(user);
+                await router.push('/');
             }
-
         } catch (error) {
             console.error(error);
             alert('Error updating user info');
         }
-    }
+    };
 
     return (
         <Layout>

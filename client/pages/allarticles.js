@@ -36,14 +36,14 @@ export default function AllArticles({ articles }) {
     );
 }
 
-export async function getStaticProps() {
-    let { data } = await supabase
+export async function getServerSideProps() {
+    const { data } = await supabase
         .from('articles')
-         .select()
+        .select();
 
     return {
         props: {
-            articles: data
+            articles: data,
         },
-    }
+    };
 }

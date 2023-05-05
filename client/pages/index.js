@@ -53,7 +53,6 @@ export default function HomePage({articles}) {
                         className="rounded-lg"
                     />
                 </div>
-                {" "}
                 <br/>
                 {displayedArticles.map((article) => (
                     <div
@@ -80,7 +79,7 @@ export default function HomePage({articles}) {
     );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     let { data } = await supabase
         .from("articles")
         .select();

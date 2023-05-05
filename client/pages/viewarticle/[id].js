@@ -66,7 +66,7 @@ export default function ViewArticle({ article }) {
     }
 
     const handleEdit = async() => {
-        if (user.id !== article.user_id){
+        if (user.user_id !== article.user_id){
             alert("You can only edit articles created by you")
             return
         }
@@ -76,7 +76,7 @@ export default function ViewArticle({ article }) {
     }
 
     const handleDelete = async () => {
-        if (user.id !== article.user_id){
+        if (user.user_id !== article.user_id){
             alert("You can only delete articles created by you")
             return
         }
@@ -89,10 +89,8 @@ export default function ViewArticle({ article }) {
                 console.error(articleError);
                 return;
             }
-            setShowPopup(true);
-            setTimeout(async () => {
-                await router.push('/')
-            }, 3000);
+            alert("Article deleted !")
+            await router.push('/')
         }
     };
 
@@ -100,9 +98,9 @@ return (
         <Layout>
             <div className="max-w-3xl mx-auto py-8 px-4">
                 <div>
-                    <h1 className="text-4xl font-bold mb-6 text-white">{article.title}</h1>
-                    <p className="text-white italic">by {article.author}</p><br/>
-                    <p className="text-lg mb-6 text-white">{article.description}</p>
+                    <h1 className="text-4xl font-bold mb-6">{article.title}</h1>
+                    <p className="italic">by {article.author}</p><br/>
+                    <p className="text-lg mb-6">{article.description}</p>
                 </div>
                 {user && (article.user_id === user.user_id) && (
                 <div className="flex">
@@ -116,39 +114,12 @@ return (
                 )}
                 <CommentList comments={comments} />
                 <CommentForm onCommentSubmit={handleCommentSubmit} />
-                {showPopup && (
-                    <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-                        <div className="bg-white rounded p-4">
-                            <p>Article deleted.</p>
-                            <p>Redirecting to home page in 3 seconds...</p>
-                        </div>
-                    </div>
-                )}
             </div>
         </Layout>
     );
 }
 
-export async function getStaticPaths() {
-    const { data, error } = await supabase
-        .from('articles')
-        .select('id');
-
-    if (error) {
-        console.error(error);
-        return {
-            notFound: true,
-        };
-    }
-
-    const paths = data.map((article) => ({
-        params: { id: article.id.toString() },
-    }));
-
-    return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const { id } = params;
     const { data, error } = await supabase
         .from('articles')
