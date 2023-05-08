@@ -3,13 +3,16 @@ import Layout from '../components/Layout';
 import UserContext from '../components/UserContext';
 import { useRouter } from 'next/router';
 import { supabase } from '../components/supabaseClient';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function Userinfo() {
-    const [YearofBirth, setYearofBirth] = useState(null);
-    const [first_name, setFirstName] = useState(null);
-    const [last_name, setLastName] = useState(null);
-    const [country, setCountry] = useState(null);
-    const [job, setJob] = useState(null);
+    const [YearofBirth, setYearofBirth] = useState("");
+    const [gender, setGender] = useState("");
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
+    const [country, setCountry] = useState("");
+    const [job, setJob] = useState("");
     const { user, login, logout } = useContext(UserContext);
     const router = useRouter();
 
@@ -32,6 +35,7 @@ export default function Userinfo() {
                 setLastName(data.last_name || '');
                 setCountry(data.country || '');
                 setJob(data.job || '');
+                setGender(data.gender || '');
             }
         };
 
@@ -48,9 +52,13 @@ export default function Userinfo() {
                 YearofBirth,
                 country,
                 job,
+                gender,
             };
 
-            const { error } = await supabase.from('users').update(userdata).eq('id', user.user_id);
+            const { error } = await supabase
+                .from('users')
+                .update(userdata)
+                .eq('id', user.user_id);
 
             if (error) {
                 throw error;
@@ -85,14 +93,13 @@ export default function Userinfo() {
                                         onChange={(e) => setFirstName(e.target.value)}
                                         className="mb-4 border rounded-md py-2 px-3"
                                     />
-                                    <label className="mb-2 font-bold" htmlFor="password">
-                                        Year of birth:
+                                    <label className="mb-2 font-bold" htmlFor="datePicker">
+                                        Date of Birth:
                                     </label>
-                                    <input
-                                        type="text"
-                                        id="YearofBirth"
-                                        value={YearofBirth || ""}
-                                        onChange={(e) => setYearofBirth(e.target.value)}
+                                    <DatePicker
+                                        id="datePicker"
+                                        selected={YearofBirth ? new Date(YearofBirth) : ''}
+                                        onChange={(date) => setYearofBirth(date)}
                                         className="mb-4 border rounded-md py-2 px-3"
                                     />
                                     <label className="mb-2 font-bold" htmlFor="job">
@@ -117,16 +124,33 @@ export default function Userinfo() {
                                         onChange={(e) => setLastName(e.target.value)}
                                         className="mb-4 border rounded-md py-2 px-3"
                                     />
-                                    <label className="mb-2 font-bold" htmlFor="country">
+                                    <label className="mb-2 font-bold">Gender:</label>
+                                    <div className="flex flex-row">
+                                        <div className="mr-4">
+                                            <input type="radio" id="male" name="gender" value="male" checked={gender === 'male'} onChange={(e) => setGender(e.target.value)} />
+                                            <label htmlFor="male" className="ml-2">Male</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" id="female" name="gender" value="female" checked={gender === 'female'} onChange={(e) => setGender(e.target.value)} />
+                                            <label htmlFor="female" className="ml-2">Female</label>
+                                        </div>
+                                    </div>
+                                    <label className="mb-2 font-bold" htmlFor="countrySelect">
                                         Country:
                                     </label>
-                                    <input
-                                        type="text"
-                                        id="country"
-                                        value={country || ""}
+                                    <select
+                                        id="countrySelect"
+                                        value={country}
                                         onChange={(e) => setCountry(e.target.value)}
                                         className="mb-4 border rounded-md py-2 px-3"
-                                    />
+                                    >
+                                        <option value="">Select a country</option>
+                                        <option value="USA">United States</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="India">India</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className="flex justify-end">

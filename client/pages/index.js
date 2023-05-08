@@ -33,11 +33,15 @@ export default function HomePage({articles}) {
         {src: "/technologies.jpg", alt: "Picture 3"},
     ];
 
+    const welcomeMessage = user
+        ? `Welcome back ${user.username} to Techno Articles!`
+        : "Welcome to Techno Articles!";
+
     return (
         <Layout>
             <div className="max-w-3xl mx-auto py-8 px-4">
                 <h1 className="text-4xl font-bold my-6 text-center">
-                    Welcome to Techno Articles!
+                    {welcomeMessage}
                 </h1>
                 <p className="text-lg mb-6">
                     This blog proposes various topics related to software engineering,
