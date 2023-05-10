@@ -107,3 +107,107 @@ CREATE TRIGGER on_auth_user_created
 ```
 
 *The different functions and triggers were found on different blogs like STackOverFlow, SupabaseDocs and reused for our project.*
+
+## Security🛡️
+
+Security is a top priority for this project, and we've implemented several measures to ensure that user data is protected. Supabase, the backend service used for this project, integrates with Row-Level Security (RLS) policies, which allows us to define rules that restrict access to certain rows in the database based on user roles and permissions.
+
+In the `users` table, we've set up the following RLS policies:
+
+- `profile_visible_by_creator` - restricts access to user profile so that only the user who created the profile can view it.
+
+```SQL
+CREATE POLICY profile_visible_by_creator
+ON users
+FOR SELECT
+USING (auth.uid() = id);
+```
+
+- `update_own_profile` - allows users to update their own profile, but not the profiles of other users.
+
+```SQL
+CREATE POLICY update_own_profile
+ON users 
+FOR UPDATE
+USING (auth.uid() = id);
+```
+
+In the `articles` table, we've set up the following RLS policies:
+
+- `delete_own_post` - allows individuals to delete their own articles.
+
+```SQL
+CREATE POLICY delete_own_articles
+ON articles 
+FOR DELETE
+USING (auth.uid() = id);
+```
+
+- `update_own_post` - allows individuals to update their own articles.
+
+```SQL
+CREATE POLICY update_own_post
+ON articles 
+FOR UPDATE
+USING (auth.uid() = id);
+```
+
+- `authenticated_insert` - restricts insertions into the table to authenticated users only.
+
+```SQL
+CREATE POLICY authenticated_insert
+ON articles 
+FOR INSERT
+WITH CHECK (auth.uid() IS NOT NULL);
+```
+
+- `articles_are_public` - allows everybody to see the articles.
+
+```SQL
+CREATE POLICY public_articles
+ON articles 
+FOR SELECT
+USING (true);
+```
+
+In the `comments` table, we've set up the following RLS policies:
+
+- `public_comments` - allows comments to be visible to all users.
+
+```SQL
+CREATE POLICY public_comments
+ON comments 
+FOR SELECT
+USING (true);
+```
+
+- `insert_comments` - allows authenticated/unauthenticated users to insert comment on a post.
+
+```SQL
+CREATE POLICY insert_comments
+ON comments 
+FOR INSERT
+WITH CHECK (true);
+```
+
+- `delete_own_comment` - allows individuals to delete their own comments.
+
+```SQL
+CREATE POLICY delete_own_comments
+ON comments 
+FOR DELETE
+USING (auth.uid() = user_id);
+```
+
+Finally, in the `contactrequest` table, we've allowed everyone to insert a contact request.
+
+- `insert_contact_request` - allows everyone to insert a contact request even if they are not authenticated.
+
+```SQL
+CREATE POLICY insert_contact_request
+ON contactrequest 
+FOR INSERT
+WITH CHECK (true);
+```
+
+By using RLS policies, we can ensure that only authorized users can access and modify data in the database, protecting user privacy and security.
