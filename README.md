@@ -211,3 +211,42 @@ WITH CHECK (true);
 ```
 
 By using RLS policies, we can ensure that only authorized users can access and modify data in the database, protecting user privacy and security.
+
+## Development🛠️
+
+### Prerequisites⚠️
+
+Before installing and running the front-end and back-end applications, make sure you have the following prerequisites installed on your computer:
+
+- Node.js and npm
+- Docker for the back-end application
+
+### Configuration Steps🔧
+
+To install and run the front-end application, you need to have Node.js and npm installed on your computer.
+
+1. To start the front-end application, open your terminal, navigate to the client directory and run the following command to install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+2. After the dependencies have been installed, run the following command to start the front-end application:
+
+    ```bash
+    npm start
+    ```
+3. Open your web browser  and go to http://localhost:3000 to see the front-end application.
+
+To install and run the back-end application, you need to have Docker installed on your computer.
+
+1. Navigate to the backend directory and run the following command to start the back-end application:
+
+    ```bash
+    docker-compose -f ./docker-compose.yml -f ./dev/docker-compose.dev.yml up
+    ```
+
+2. Open your web browser and go to http://localhost:3001 to see the back-end application.
+
+This command will start the back-end server and any necessary services.
+
