@@ -250,3 +250,13 @@ To install and run the back-end application, you need to have Docker installed o
 
 This command will start the back-end server and any necessary services.
 
+## Deployment🚀
+
+The project has been deployed to :
+
+- Front-end: Vercel as a cloud platform that hosts the front-end of our project. It specializes in static and serverless sites.
+
+- Back-end: SupaBase as a Backend-as-a-Service (BaaS) platform that provides tools to build the back-end of our project to avoid having to manage server infrastructure.
+
+Here is the URL to access the Techno Articles website: https://ece-webtech-gr02-04.vercel.app/
+
