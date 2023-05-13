@@ -260,3 +260,12 @@ The project has been deployed to :
 
 Here is the URL to access the Techno Articles website: https://ece-webtech-gr02-04.vercel.app/
 
+## About the Authors👨‍💻
+
+The website was developed by Raphael LAZZARI-ARMOUR and Axel PAPE.
+
+## Thanks and Recognition
+
+Special thanks to Paul FARAULT and David WORMS both engineers from the company ADALTAS who taught us the subject of web technologies. 
+
+
