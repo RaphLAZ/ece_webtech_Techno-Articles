@@ -284,24 +284,34 @@ Here is the URL to access the Techno Articles website: https://ece-webtech-gr02-
 
 * **Home page**  
   *2/2*
+  *Implemented and worked weel, index.js*
 * **Login and profile page**  
   *4/4*
+  *Implemented and worked weel, userinfo.js.js and login.js*
 * **New articles creation**  
   *6/6*
+  *Implemented and worked weel, newarticles.js*
 * **New comment creation**  
   *4/4*
 * **Resource access control**  
   *6/6*
 * **Article modification**  
   *4/4*
+  *Implemented and worked weel, modify.article/[id].js*
 * **Article removal**  
   *4/4*
 * **Comment modification**  
   *4/4*
+  *Implemented and worked weel, CommentList*
 * **Comment removal**  
   *4/4*
+  *Implemented and worked weel, CommentList*
 * **Account settings**  
   *4/4*
+  *Implemented and work well, userinfo.js *
+* **Search**  
+  *6/6*
+  *Implemented and worked weel, searchresult.js and header.js*
 * **WYSIWYG integration**  
   *0/2 not implemented*
 * **Gravatar integration**  
