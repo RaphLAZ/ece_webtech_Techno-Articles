@@ -260,6 +260,59 @@ The project has been deployed to :
 
 Here is the URL to access the Techno Articles website: https://ece-webtech-gr02-04.vercel.app/
 
+## Production
+
+* Vercel URL: <https://ece-webtech-gr02-04.vercel.app/>
+* Supabase project URL: <https://app.supabase.com/project/kjxediceuguygzntixdx>
+
+## Tasks
+
+### Project management
+
+* **Naming convention**  
+  *place your graduation and comments*
+* **Project structure**  
+  *place your graduation and comments*
+* **Git**  
+  *place your graduation and comments*
+* **Code quality**  
+  *place your graduation and comments*
+* **Design, UX, and content**  
+  *place your graduation and comments*
+
+### Application development
+
+* **Home page**  
+  *2/2*
+* **Login and profile page**  
+  *4/4*
+* **New articles creation**  
+  *6/6*
+* **New comment creation**  
+  *4/4*
+* **Resource access control**  
+  *6/6*
+* **Article modification**  
+  *4/4*
+* **Article removal**  
+  *4/4*
+* **Comment modification**  
+  *4/4*
+* **Comment removal**  
+  *4/4*
+* **Account settings**  
+  *4/4*
+* **WYSIWYG integration**  
+  *0/2 not implemented*
+* **Gravatar integration**  
+  *0/2 not implemented*
+* **Light/dark theme**  
+  *0/2 not implemented*
+* **Accent color selection**  
+  *0/2 not implemented*
+  
+  Total: 
+
 ## About the Authors👨‍💻
 
 The website was developed by Raphael LAZZARI-ARMOUR and Axel PAPE.
@@ -267,5 +320,7 @@ The website was developed by Raphael LAZZARI-ARMOUR and Axel PAPE.
 ## Thanks and Recognition
 
 Special thanks to Paul FARAULT and David WORMS both engineers from the company ADALTAS who taught us the subject of web technologies. 
+
+* [ ] I agree to allow my project to be used anonymously as an example for future students.
 
 
