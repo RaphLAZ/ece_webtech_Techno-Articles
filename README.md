@@ -272,46 +272,67 @@ Here is the URL to access the Techno Articles website: https://ece-webtech-gr02-
 * **Naming convention**  
   *place your graduation and comments*
 * **Project structure**  
-  *place your graduation and comments*
+  *2/2, the structure is clear and respect the given one*
 * **Git**  
-  *place your graduation and comments*
+  *1/2*
+  *Whe have some weakness on commit history and branch usage*
 * **Code quality**  
-  *place your graduation and comments*
+  *1/2*
+  *We do best effort on indentation and understandability but code need more comments*
 * **Design, UX, and content**  
-  *place your graduation and comments*
+  *2/4*
+  *We made a simple design that allows a very good user experience* 
 
 ### Application development
 
 * **Home page**  
   *2/2*
-  *Implemented and worked weel, index.js*
+  *Implemented and worked weel*
+  *We create all pages needed with some relevant information like on well-known websites*
+  *You can navigate between differents pages thanks navigation menu*
 * **Login and profile page**  
   *4/4*
   *Implemented and worked weel, userinfo.js.js and login.js*
+  *You can create (SignUp) or connect(logIn) to your account*
+  * You can connect thanks github connection*
+  * You can see you private information on your userinfo pages*
 * **New articles creation**  
   *6/6*
   *Implemented and worked weel, newarticles.js*
+  *You can create some new article*
+  *You can save it*
+  *you can cancel it*
 * **New comment creation**  
   *4/4*
+  *You can put some comments on article*
+  *comments are save in database*
 * **Resource access control**  
   *6/6*
+  *Non-authenticated user are in read only you can just comment*
+  *If your are authenticated you can create article and put some comments*
 * **Article modification**  
   *4/4*
   *Implemented and worked weel, modify.article/[id].js*
+  *you an can edit your article*
 * **Article removal**  
   *4/4*
+  *You can delete your article*
 * **Comment modification**  
   *4/4*
+  *You can modify comments*
   *Implemented and worked weel, CommentList*
 * **Comment removal**  
   *4/4*
+  *you can delete comments*
   *Implemented and worked weel, CommentList*
 * **Account settings**  
   *4/4*
   *Implemented and work well, userinfo.js *
+  *In your profil page you can modify some of your information*
 * **Search**  
   *6/6*
   *Implemented and worked weel, searchresult.js and header.js*
+  *With search bar you can find some posts thanks title*
 * **WYSIWYG integration**  
   *0/2 not implemented*
 * **Gravatar integration**  
@@ -321,7 +342,7 @@ Here is the URL to access the Techno Articles website: https://ece-webtech-gr02-
 * **Accent color selection**  
   *0/2 not implemented*
   
-  Total: 
+  Total: 54
 
 ## About the Authors👨‍💻
 
