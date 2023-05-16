@@ -2,7 +2,7 @@
 
 *Project as part of the web technologies course at the ECE School of Engineering*
 
-The project is called "Techno Articles" and is a simple web application that allows users to create an account, create blog articles, and leave comments on other users' blog articles.
+The project is called "Techno Articles" and is a simple web application that allows users to create an account, create blog articles, and leave comments on other users' blog articles. 
 
 ## How it works🔧
 
@@ -21,8 +21,6 @@ The project has the following main features:
 2. User profiles: users can view their own profiles, edit their own profiles.
 3. Blog articles: users can create blog articles, edit their own blog articles, and delete their own blog articles.
 4. Comments: users can leave comments on other users' blog articles, edit their own comments, and delete their own comments.
-
-*💡Our front-end application uses a Static Site Generator (SSG) to generate HTML pages from the source code.*
 
 ## Database schema🗂️
 
@@ -250,17 +248,13 @@ To install and run the back-end application, you need to have Docker installed o
 
 This command will start the back-end server and any necessary services.
 
-## Deployment🚀
+## Production🚀
 
 The project has been deployed to :
 
 - Front-end: Vercel as a cloud platform that hosts the front-end of our project. It specializes in static and serverless sites.
 
 - Back-end: SupaBase as a Backend-as-a-Service (BaaS) platform that provides tools to build the back-end of our project to avoid having to manage server infrastructure.
-
-Here is the URL to access the Techno Articles website: https://ece-webtech-gr02-04.vercel.app/
-
-## Production
 
 * Vercel URL: <https://ece-webtech-gr02-04.vercel.app/>
 * Supabase project URL: <https://app.supabase.com/project/kjxediceuguygzntixdx>
@@ -270,79 +264,46 @@ Here is the URL to access the Techno Articles website: https://ece-webtech-gr02-
 ### Project management
 
 * **Naming convention**  
-  *place your graduation and comments*
-* **Project structure**  
-  *2/2, the structure is clear and respect the given one*
+  - ✅ Task completed 2/2 : *Project was done by both authors during classes and commits was done on GitHub once build didn't have any errors on local test device.*
+* **Project structure**
+  - ✅ Task completed 2/2 : *Project is respecting the structure and organization of a React application. Same one as the one used during  the classes. `app` folder has the React application code and `supabase` folder has the Development Docker files and necessary file to start supabase with Docker on local device.*
 * **Git**  
-  *1/2*
-  *Whe have some weakness on commit history and branch usage*
+  - ✅ Task completed 1/2 : *Some weakness on usage of branches and git features. But good presence of history that allows to find older versions of the project*
 * **Code quality**  
-  *1/2*
-  *We do best effort on indentation and understandability but code need more comments*
+  - ✅ Task completed 1/2 : *We did the best on indentation of code, understandability using variables names that makes sense. Probably need more comments to the code even if code is comprehensible with the structure and variables names used.*
 * **Design, UX, and content**  
-  *2/4*
-  *We made a simple design that allows a very good user experience* 
+  - ✅ Task completed 3/4 : *Design is good. Overlook of code as well. Tailwind was properly used. User experience could been better by adding possibility to the user to add pictures for articles.* 
 
 ### Application development
 
 * **Home page**  
-  *2/2*
-  *Implemented and worked weel*
-  *We create all pages needed with some relevant information like on well-known websites*
-  *You can navigate between differents pages thanks navigation menu*
+  - ✅ Task completed 2/2 : *Website is informative and friendly for a good experience for each user. All pages shows some relevant information like on well-known websites. User can send a contact message to administrators of the website. An about page is visible to present quickly the authors of the project. All the pages are accessible from header visible in the hole website. Navigation is possible between all pages thanks to the navigation bar. Home page is the `pages/index.js` file, files for navigation are `components/Header.js`, `components/Footer.js` and `components/Layout.js` as well as the `header` folder in the folder components. About and Contact pages are located in the folder pages.*
 * **Login and profile page**  
-  *4/4*
-  *Implemented and worked weel, userinfo.js.js and login.js*
-  *You can create (SignUp) or connect(logIn) to your account*
-  * You can connect thanks github connection*
-  * You can see you private information on your userinfo pages*
-* **New articles creation**  
-  *6/6*
-  *Implemented and worked weel, newarticles.js*
-  *You can create some new article*
-  *You can save it*
-  *you can cancel it*
+  - ✅ Task completed 4/4 : *Login/Logout button present in the header. when user clicks on login it sends him to the login page and when clicking on logout sends him the home page and logs him out. User authenticated information is persisted in React context thanks to UserContext.js code. His name displays on the home page and in the logout button in the header. User can create an account with either email or with his GitHub account. Same possibility for signing in when suer already has an account. User has the possibility  to see/modify his personal information in the pages/userinfo.js code. By default, when user signs up, no information apart from his email is completed in the database. Cof for this feature is at the `pages/login.js`*
+* **New post creation**  
+  - ✅ Task completed 6/6 : *Code for adding an article is visible at `pages/newarticle.js`. Button for adding a new article is visible on the all articles page, code for this page is `allarticles.js`.  User can set title and description of article. (His name is automatically set with his personal information). A cancel button is available if user decides to not create article anymore. Once the user clicks on `add new article`, the article is persisted in database.*
 * **New comment creation**  
-  *4/4*
-  *You can put some comments on article*
-  *comments are save in database*
+  - ✅ Task completed 4/4 : *Everyone can add comments to articles. Name of the user is automatically added with his login personal information. If the user is not log in, his name will be put at "Anonymous". Comments are persisted in database. Code for this feature is visible at `components/CommentForm.js`.*
 * **Resource access control**  
-  *6/6*
-  *Non-authenticated user are in read only you can just comment*
-  *If your are authenticated you can create article and put some comments*
-* **Article modification**  
-  *4/4*
-  *Implemented and worked weel, modify.article/[id].js*
-  *you an can edit your article*
-* **Article removal**  
-  *4/4*
-  *You can delete your article*
-* **Comment modification**  
-  *4/4*
-  *You can modify comments*
-  *Implemented and worked weel, CommentList*
-* **Comment removal**  
-  *4/4*
-  *you can delete comments*
-  *Implemented and worked weel, CommentList*
+  - ✅ Task completed 6/6 : *RLS policies are added to database. The RLS policies used for the project are visible if you go to the Security paragraph. Only authenticated users can create posts. A user must only gain access to the posts or comments he created. Unauthenticated users can only read posts and post comments.*
+* **Post modification and removal**  
+  - ✅ Task completed 4/4 : *"edit" and "delete" buttons are visible on article page only if the login user is the one that created the article. Code for editing article is `modifyarticle/[id].js`.*
+* **Comment modification and removal**  
+  - ✅ Task completed 4/4 : *"edit" and "delete" buttons are visible on the Comment only if the login user is the one that created the comment. Cor for editing comment is at `editcomment/[id].js`.*
 * **Account settings**  
-  *4/4*
-  *Implemented and work well, userinfo.js *
-  *In your profil page you can modify some of your information*
+  - ✅ Task completed 4/4 : *User can modify his/her personal information settings. We are using 4 different form of components. A combobox, a date picker, radio buttons and a text input. Code for this page is at `pages/userinfo.js`.*
 * **Search**  
-  *6/6*
-  *Implemented and worked weel, searchresult.js and header.js*
-  *With search bar you can find some posts thanks title*
+  - ✅ Task completed 6/6 : *When user types a word in the search bar, the application will look for all articles where the word is present either in the description or in the title of the article. The page that displays the articles of the search in the database is at `pages/searchresult.js`.*
 * **WYSIWYG integration**  
-  *0/2 not implemented*
+  - ❌ Task not completed 0/2 : *Didn't have enough time to implement this feature.*
 * **Gravatar integration**  
-  *0/2 not implemented*
+  - ❌ Task not completed 0/2 : *Didn't have enough time to implement this feature.*
 * **Light/dark theme**  
-  *0/2 not implemented*
-* **Accent color selection**  
-  *0/2 not implemented*
+  - ❌ Task not completed 0/2 : *Didn't have enough time to implement this feature.*
+* **Theme selection**  
+  - ❌ Task not completed 0/4 : *Didn't have enough time to implement this feature.*
   
-  Total: 54
+Total: 49 = 16.33/20
 
 ## About the Authors👨‍💻
 
@@ -352,6 +313,6 @@ The website was developed by Raphael LAZZARI-ARMOUR and Axel PAPE.
 
 Special thanks to Paul FARAULT and David WORMS both engineers from the company ADALTAS who taught us the subject of web technologies. 
 
-* [ ] I agree to allow my project to be used anonymously as an example for future students.
+* ❌ I do not agree to allow my project to be used anonymously as an example for future students.
 
 

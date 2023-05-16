@@ -5,73 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1e7072b-10d7-42c5-822a-99bc3915ea5c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/components/UserContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/pages/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/Background.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/cybersecurity.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/software.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/technologies.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab1/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab1/handles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab1/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab1/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab2/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab2/content/about.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab2/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab2/project.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab3/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab3/comments.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab3/content/about.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab3/db.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab3/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab3/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Labs/Lab3/project.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/dev/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/dev/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/dev/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/dev/docker-compose.dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/docker-compose-logging.yml" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/docker-compose-logging.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/volumes/api/kong.yml" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/volumes/api/kong.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/volumes/db/init/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/volumes/db/init/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/volumes/db/logs.sql" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/volumes/db/logs.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/volumes/db/realtime.sql" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/volumes/db/realtime.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/volumes/db/roles.sql" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/volumes/db/roles.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/volumes/db/webhooks.sql" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/volumes/db/webhooks.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/volumes/logs/vector.yml" beforeDir="false" afterPath="$PROJECT_DIR$/supabase/volumes/logs/vector.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/client/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/components/CommentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/components/CommentList.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/components/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/Footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/components/Layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/Layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/components/UserContext.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/components/header/LoggedIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/header/LoggedIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/components/header/LoggedOut.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/header/LoggedOut.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/components/supabaseClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/supabaseClient.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/data/contact.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/about.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/about.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/allarticles.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/allarticles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/api/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/api/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/contact.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/modifyarticle/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/modifyarticle/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/newarticle.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/newarticle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/userinfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/userinfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/pages/viewarticle/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/viewarticle/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/postcss.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/public/Axel-Pape.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/Axel-Pape.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/public/Raph-Picture.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/Raph-Picture.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/styles/books.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/styles/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/CommentForm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/CommentList.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/Footer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/Header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/Layout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/UserContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/header/LoggedIn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/header/LoggedOut.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/supabaseClient.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/next.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/_app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/about.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/allarticles.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/api/profile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/contact.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/editcomment/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/modifyarticle/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/newarticle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/searchresult.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/userinfo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/viewarticle/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/postcss.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/Axel-Pape.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/Background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/Raph-Picture.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/cybersecurity.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/software.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/technologies.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/styles/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/tailwind.config.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
